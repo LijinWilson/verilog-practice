@@ -1,0 +1,47 @@
+----------------------------- design-----------------------------------
+
+module binary_to_gray(a, y);
+input [3:0] a;
+output [3:0]  y;
+
+// logic 
+assign y[3]=a[3];       // MSB remains same as it
+assign y[2]=a[3]^a[2];
+assign y[1]=a[2]^a[1];
+assign y[0]=a[1]^a[0];
+
+endmodule
+
+/*
+in binary to gray code conversion we are using xor operation between the each bit
+for example
+a = 0010
+msb will come down as it is, then each bit will undergo xor operattion with each other
+- MSB = 0
+- 0 xor 0 = 0
+- 0 xor 1 = 1
+- 1 xor 0 = 1; 
+*/
+
+
+
+----------------------- test bench ------------------------------------
+module tb();
+reg [3:0] a;
+wire [3:0] y;
+
+binary_to_gray yy(a, y);
+
+initial
+    begin
+        a=4'b0010; #2
+        a=4'b1010; #2
+        $finish();
+    end
+    
+    initial
+        begin
+            $monitor("a = %b, y = %b", a, y);
+        end
+
+endmodule
