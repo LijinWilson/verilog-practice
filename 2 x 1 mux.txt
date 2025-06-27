@@ -1,0 +1,40 @@
+----------------------- design ----------------------
+module two_x_one_mux(a,b,s,y);
+input a,b,s;
+output y;
+wire [1:0] w;
+wire s_bar;
+
+not not1(s_bar, s);
+and and1(w[0], a, s_bar);
+and and2(w[1], b, s);
+
+or (y, w[0], w[1]);
+endmodule
+
+
+using turnary
+assign y = s?b:a;
+
+---------------------- test bench -----------------------
+module two_x_one_mux_tb();
+reg a, b, s;
+wire y;
+
+// instantiating
+two_x_one_mux h1(a,b,s,y);
+
+initial
+    begin
+        a=0;b=0; s=0;#2
+        a=0;b=1; s=0;#2
+        a=1;b=0; s=1;#2
+        a=1;b=1; s=1;#2
+        $finish();
+    end
+    
+    initial
+        begin
+            $monitor("a=%b, b=%b, s=%b y=%b", a, b, s, y);
+        end
+endmodule

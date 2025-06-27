@@ -1,0 +1,21 @@
+// Code your testbench here
+// or browse Examples
+module test;
+reg a;
+  wire b;
+  integer c;
+  real d;
+  realtime e;
+  time f;
+  
+  
+  initial
+  begin
+    $display("reg=%b, wire=%b, integer=%b, real=%b, realtime=%b, time=%b", a, b, c, d, e, f);
+  end
+  
+endmodule
+
+
+output 
+reg=x, wire=z, integer=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx, real=0000000000000000000000000000000000000000000000000000000000000000, realtime=0000000000000000000000000000000000000000000000000000000000000000, time=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

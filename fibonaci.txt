@@ -1,0 +1,19 @@
+module fibonaci();
+integer ft=0;
+integer st=1;
+integer nt;
+integer n=10;
+
+initial 
+    begin
+        $write("%d", ft);
+        $write("%d", st);       
+    
+    for(integer i=0; i<n-2; i=i+1) begin
+        nt=ft+st;
+        ft=st;
+        st=nt;
+        $write("%d", nt);
+    
+    end
+endmodule

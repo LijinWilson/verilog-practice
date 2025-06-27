@@ -1,0 +1,21 @@
+----------------- design ----------------------
+
+module t_latch(t, clk, rst, q);
+input t, clk, rst;
+output reg q;
+
+always @ (q, clk, rst)begin
+    if(rst)
+        q<=0;
+        else
+            if(clk)
+                begin
+                    if(t)
+                        q<=~q;
+                end
+                
+end
+
+endmodule
+
+------------- test bench --------------------

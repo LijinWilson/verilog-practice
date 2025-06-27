@@ -1,0 +1,46 @@
+---------------------- design --------------------
+module counter_4bit(clk, rst, q);
+input clk, rst;
+output [3:0] q;
+
+reg [3:0] temp;
+assign q = temp;
+ 
+ always @ (posedge clk) begin
+ 
+    if(rst) begin
+        temp=4'b0000;
+    end
+    else 
+        temp<=temp+1;
+ end
+
+endmodule
+
+--------------------- test bench ------------------------
+module counter_tb();
+    
+    reg clk, rst;
+    wire [3:0] q;
+    
+    
+    // initlization
+    counter_4bit cc(clk, rst, q);
+    initial
+    begin
+        clk=1'b0;
+        rst=1'b1;
+        
+        #7 rst = 0;
+        
+        #600 $finish();
+   end
+        always
+            #5 clk=~clk;
+            
+            initial
+                begin
+                    $monitor("clk=%b | rst=%b | q=%b", clk, rst, q);
+                end
+    
+endmodule

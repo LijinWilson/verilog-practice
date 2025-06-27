@@ -1,0 +1,49 @@
+// declare the vector and array and accessing the values from them
+module memory();
+  reg [3:0] a;
+  reg [0:3] b;
+  
+  initial 
+    	begin
+          a=4'b1010;
+          b=4'b0101;
+          
+        end
+  initial
+    begin
+      $display("time=%time, a[2]=%b, b[2]=%b", $time, a[2], b[2]);
+    end
+endmodule
+
+
+
+module array();
+  reg [3:0]memory[0:3];
+  
+  initial
+    begin
+      memory[0]=4'b1001;
+      memory[1]=4'b1010;
+      memory[2]=4'b1011;
+      memory[3]=4'b1100;
+    end
+  
+    initial
+    begin
+      $display("memory[0]=%d, memory[1]=%d, memory[2]=%d, memory[3]=%d", memory[0], memory[1], memory[2], memory[3]);
+      
+      $display("location memory[2][2] = %b", memory[2][2]);
+      $display(" Location memory[3][1:0] = %b", memory[3][1:0]);
+      
+    end
+
+
+
+---------------------------------------------
+time=                   0ime, a[2]=0, b[2]=0
+memory[0]= 9, memory[1]=10, memory[2]=11, memory[3]=12
+location memory[2][2] = 0
+ Location memory[3][1:0] = 00
+---------------------------------------------
+  
+endmodule

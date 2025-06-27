@@ -1,0 +1,55 @@
+--------------------- verilog -----------------------------
+
+module half_adder(a, b, s, c);
+input a, b;
+output s, c;
+
+xor x1(s, a, b);
+and a1(c, a, b);
+
+endmodule
+
+--------------- design in data flow model -----------------
+// half adder using data flow
+
+module half_adder(a, b, sum, carry);
+
+input a, b;
+output sum, carry;
+
+assign sum = a^b;
+assign carry = a&b;
+
+or
+
+assign {c, s} = a+b;
+endmodule
+
+--------------------------------- test bench ---------------------------------
+module halfadder_tb();
+reg a, b;
+wire s, c;
+
+// instantiating
+half_adder H1(a, b, s, c);
+
+initial
+    begin
+        a=0;b=0;
+        a=0;b=1;#2
+        a=1;b=0;#2
+        a=1;b=1;#2
+        $finish();
+    end
+
+ or 
+for (integer i = 0; i<4; i=i+1)
+begin
+	{a, b} = i; #2
+end
+    
+    initial
+        begin
+            $monitor("a=%b, b=%b, sum=%b;", a, b, c);
+        end
+endmodule

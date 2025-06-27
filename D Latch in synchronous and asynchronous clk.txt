@@ -1,0 +1,39 @@
+----------------------- design --------------------
+---->>>>>asynchronous rst
+
+module D_latch(d, rst, clk, q);
+    input d, clk, rst;
+    output reg q;
+    
+    always @ (d, rst, clk) begin
+        if(rst)
+            if(clk)
+            q<=0;
+        else
+            if(clk)
+                q<=d;  
+    end
+endmodule
+
+---------------------------- test bench ------------------------
+module clock();
+reg clk, rst, d;
+wire q;
+
+// initialzation
+D_latch d1(d, rst, clk, q);
+initial
+    begin
+        clk=1'b0;
+        rst=1'b1;
+        #2 d = 1;
+        #7 rst = 0;
+        #6 d =0;
+        #5 d = 1;
+        #6 d = 0;
+        
+        #10 $finish();
+   end
+        always
+            #5 clk=~clk;
+endmodule

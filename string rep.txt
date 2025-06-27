@@ -1,0 +1,44 @@
+module stringrep();
+
+  reg [8*6:1] name;
+  // reg [8*length:1]
+  
+  initial
+    begin
+      name="sanjay";
+      
+      $display("name is %s", name);
+    end
+  
+endmodule
+
+
+______________________________________
+output
+name is Sanjay
+
+
+// Code your design here
+module taskclass();
+  reg a=4'b100x;
+  reg b=4'b0x00;
+  
+  initial
+    begin
+      $display("a&&b", a, b, a&&b);
+      $display("a||b", a, b, a||b);
+      $display("a&b", a, b, a&b);
+      $display("a|b", a, b, a|b);
+      $display("logical and operation of %b and %b is %b", a, b, &a);
+      $display("logical and operation of %b and %b is %b", a, b, &b);
+      $display("logical and operation of %b and %b is %b", a, b, |a);
+      $display("logical and operation of %b and %b is %b", a, b, |b);
+      $display("logical and operation of %b and %b is %b", a, b, ^a);
+      $display("logical and operation of %b and %b is %b", a, b, ^b);
+      $display("logical and operation of %b and %b is %b", a, b, a^b);
+      $display("logical and operation of %b and %b is %b", a, b, a<<b);
+      $display("logical and operation of %b and %b is %b", a, b, b>>a);
+      $display("logical and operation of %b and %b is %b", a, b, {a, b});
+      $display("logical and operation of %b and %b is %b", a, b, {{2{b}}, a});
+    end
+endmodule

@@ -1,0 +1,31 @@
+---------------------- design --------------------------
+module priority_encoder_4to2(d, q);
+    input [3:0] d;
+    output reg [1:0] q;
+    
+    always @(*) begin
+        casex(d)
+            4'bxxx1 : q=2'b00;
+            4'bxx1x : q=2'b01;
+            4'bx1xx : q=2'b10;
+            4'b1xxx : q=2'b11;
+            default: q=2'bxx;
+        endcase
+    end
+    
+     
+endmodule
+
+----------------- test bench ------------------
+module priority_encoder();
+reg [3:0] d;
+wire [1:0] q;
+
+// instantiating module
+priority_encoder_4to2 pe1(d, q);
+
+initial
+    begin
+        d=
+    end
+endmodule

@@ -1,0 +1,30 @@
+----------------------------- design -----------------------------------------
+module decoder_3to8(i, y);
+input {2:0} i;
+output [7:0] y;
+
+assign y = 8'b0000_0001<<1;
+
+endmodule
+
+-------------------- test bench ------------------------
+module two_x_one_mux_tb();
+reg i;
+wire y;
+
+// instantiating
+decoder_3to8 DE(i, y);
+integer n;
+initial
+    begin
+        for( n=0;n<=7;n=i+1)
+        begin
+            i=n; #2;
+        end
+    end
+    
+    initial
+        begin
+            $monitor("a=%b, b=%b, c=%b y=%b", a, b, c, y);
+        end
+endmodule

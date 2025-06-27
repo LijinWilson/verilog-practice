@@ -1,0 +1,39 @@
+------------------ design -------------------------
+// full substractor using data flow model
+module full_sub(a, b, cin, diff, borrow);
+
+input a, b, cin;
+output diff, borrow;
+
+assign diff = a^b^cin;
+assign borrow = b&~(a^b)|~(a)&b;
+
+endmodule
+
+------------------- test bench ----------------------
+module full_sub_tb();
+reg a, b, cin;
+wire diff, borrow;
+
+// instantiating
+full_sub FS(a, b, cin, diff, borrow);
+
+initial
+    begin
+        a=0;b=0;cin=0; #2
+        a=0;b=0;cin=1; #2
+        a=0;b=1;cin=0; #2
+        a=0;b=1;cin=1; #2
+        a=1;b=0;cin=0; #2
+        a=1;b=0;cin=1; #2
+        a=1;b=1;cin=0; #2
+        a=1;b=1;cin=1; #2
+        $finish();
+    end
+    
+    initial
+        begin
+            $monitor("a=%b, b=%b, cin=%b, diff=%b, borrow=%b", a, b, cin, diff, borrow);
+        end
+        
+endmodule

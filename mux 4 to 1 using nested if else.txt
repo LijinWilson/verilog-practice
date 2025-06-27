@@ -1,0 +1,77 @@
+---------------------------- design ----------------------------------------
+
+
+module mux4to1(i, s, y);
+input [4:0] i;
+input [1:0] s;
+output reg y;
+
+always @(s)
+    begin
+        if(s == 2'b00)begin
+           y=i[0];
+        end
+        else if (s == 2'b01) begin
+            y=i[1];
+        end
+        else if (s == 2'b10) begin
+            y=i[2];
+        end
+        else begin
+            y=i[4];
+        end
+        
+    end
+
+endmodule
+
+--------------------------------- test bench -------------------------------------
+
+
+
+// 4 to 1 mux using case statement
+
+module mux_4to1(i, s, y);
+input [3:0] i;
+input [1:0] s;
+output reg y;
+
+always @(*) begin
+    case(s) 
+        2'b00: y=i[0];
+        2'b01: y=i[1];
+        2'b10: y=i[2];
+        2'b11: y=i[3];
+        default: $display("invalid selection :)");
+    endcase
+end
+
+endmodule
+
+
+
+
+------------------- using case statement ------------------------------
+module mux_tb();
+reg [3:0] i;
+reg [1:0] s;
+wire y;
+
+mux_4to1 mux1(i, s, y);
+
+initial
+    begin
+        i=4'b0001; s=2'b00; #2
+        i=4'b0011; s=2'b01; #2
+        i=4'b0111; s=2'b10; #2
+        i=4'b1111; s=2'b11; #2
+        $finish();
+    end
+    
+    initial
+    begin
+        $monitor("i=%b | s=%b | y=%b", i, s, y);
+    end
+endmodule
+
+

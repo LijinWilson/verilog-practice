@@ -1,0 +1,48 @@
+------------------------------------- design -----------------------------
+module FAHA(a, b, c, s, cout);
+input a, b, c;
+output s, cout;
+
+wire d, e, f;
+
+// implementing using 2 hlaf adder
+halfadder HA1(a, b, f, d);
+halfadder HA2(c, f, s, e);
+
+// adding the carry output from both half adder
+
+or or1(cout, d, e);
+
+endmodule
+
+module halfadder(a, b, s, cout);
+
+input a, b;
+output s, cout;
+
+xor x1(s, a, b);
+and a1(cout, a, b);
+
+endmodule
+---------------------------------- test bench -------------------------------
+module xorand_tb();
+reg a, b, c;
+wire s, cout;
+
+// instantiating
+FAHA H1(a, b, c, s, cout);
+
+initial
+    begin
+        a=0;b=0; c=0;#2
+        a=0;b=1; c=0;#2
+        a=1;b=0; c=1;#2
+        a=1;b=1; c=1;#2
+        $finish();
+    end
+    
+    initial
+        begin
+            $monitor("a=%b, b=%b, c=%b s=%b cout=%b", a, b, c, s, cout);
+        end
+endmodule

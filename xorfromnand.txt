@@ -1,0 +1,40 @@
+implement XOR gate using NAND gate
+
+---------------------------- module -------------------------------
+
+module xorand(a, b, y);
+input a, b;
+output y;
+
+wire c, d, e, f;
+
+nand n1(c, a, a);
+nand n2(d, b, b);
+nand n3(f, c, b);
+nand n4(e, a, d);
+nand n5(y, e, f);
+
+endmodule
+
+-------------------------- test bench ------------------------------
+module xorand_tb();
+reg a, b;
+wire y;
+
+// instantiating
+xorand H1(a, b, y);
+
+initial
+    begin
+        a=0;b=0;#2
+        a=0;b=1;#2
+        a=1;b=0;#2
+        a=1;b=1;#2
+        $finish();
+    end
+    
+    initial
+        begin
+            $monitor("a=%b, b=%b, ouptut=%b;", a, b, y);
+        end
+endmodule

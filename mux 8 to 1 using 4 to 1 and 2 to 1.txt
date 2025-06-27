@@ -1,0 +1,61 @@
+------------------------- design -------------------------------------
+module mux4to1(a, b, c, d, s0, s1, y);
+input a, b, c, d;
+input s0, s1;
+output y;
+
+assign y = s1 ? (s0 ? d : c) : (s0 ? b : a);
+
+endmodule
+
+module mux_two_to_one(a, b, s, y);
+input a, b, s;
+output y;
+
+assign y = s?b:a;
+
+endmodule
+
+
+module mux8to1(i, s, y);
+input [7:0] i;
+output y;
+input [2:0]s;
+
+wire [1:0] w;
+
+mux4to1 m1(i[0], i[1], i[2], i[3], s[0], s[1], w[0]);
+mux4to1 m2(i[4], i[5], i[6], i[7], s[0], s[1], w[1]);
+
+mux_two_to_one m3(w[0], w[1], s[2], y);
+
+
+endmodule
+
+--------------------------- test bench --------------------
+module fulladder_HA_tb();
+reg [7:0] i;
+wire y;
+reg [2:0]s;
+
+// instantiating
+mux8to1 H1(i, s, y);
+
+initial
+    begin
+        i=8'b00000101; s=3'b000;#2
+        i=8'b00000101; s=3'b001;#2
+        i=8'b00000101; s=3'b010;#2
+        i=8'b00000101; s=3'b100;#2
+        i=8'b00000101; s=3'b111;#2
+        
+        
+        
+        $finish();
+    end
+    
+    initial
+        begin
+            $monitor("i=%b s=%b y=%b", i, s, y);
+        end
+endmodule
