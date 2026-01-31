@@ -29,7 +29,7 @@ module ringCounter_tb();
   reg clk, rst;
   wire [3:0] out;
   
-// -------------- Instantiation --------------
+//  Instantiation 
   ring_counter tb1(clk, rst, out);
   
   initial
